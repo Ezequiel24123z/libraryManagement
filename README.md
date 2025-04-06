@@ -31,6 +31,7 @@ En esta práctica, desarrollarás una aplicación en Java para gestionar una bib
       Implementa un constructor para inicializar los atributos.
       Implementa métodos getters y setters para los atributos.
       Implementa un método toString para mostrar la información del libro.
+
 #### 2. Clase Usuario
       Crea una clase Usuario con los siguientes atributos: nombre (String), id (int), librosPrestados (Array de Libro).
       Implementa un constructor para inicializar los atributos.
@@ -38,19 +39,22 @@ En esta práctica, desarrollarás una aplicación en Java para gestionar una bib
       Implementa un método prestarLibro para añadir un libro al array de libros prestados.
       Implementa un método devolverLibro para eliminar un libro del array de libros prestados.
       Implementa un método reservarLibro para reservar libros que no están disponibles.
+      Implementa un método que liste todos los ususuarios existentes
+
 #### 3. Clase Biblioteca
       Crea una clase Biblioteca con los siguientes atributos: libros (Array de Libro), usuarios (Array de Usuario).
       Implementa un constructor para inicializar los atributos.
       Implementa métodos para añadir libros y usuarios.
       Implementa métodos para prestar y devolver libros.
       Implementa métodos para buscar libros por título y autor.
+      
 #### 4. JUnit Tests
       Crea una clase de pruebas BibliotecaTest utilizando JUnit para verificar el correcto funcionamiento de los métodos.
-      Desafíos Adicionales
 
 #### 5. Implementar búsqueda de libros:
 
       Añade un método en la clase Biblioteca para buscar libros por título o autor.
+      Añade un método para que liste los libros que están disponibles para reservar
 
 #### 6. Implementar reserva de libros:
 

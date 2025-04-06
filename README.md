@@ -47,7 +47,7 @@ En esta práctica, desarrollarás una aplicación en Java para gestionar una bib
       Implementa métodos para añadir libros y usuarios.
       Implementa métodos para prestar y devolver libros.
       Implementa métodos para buscar libros por título y autor.
-      
+
 #### 4. JUnit Tests
       Crea una clase de pruebas BibliotecaTest utilizando JUnit para verificar el correcto funcionamiento de los métodos.
 
@@ -62,7 +62,7 @@ En esta práctica, desarrollarás una aplicación en Java para gestionar una bib
 
 #### 7. Desafío para los más avanzados:
       
-      Implementa una conexión a una base de datos utilizando JDBC para almacenar y recuperar información de libros y usuarios. Haz uso de la clase LibraryJDBC
+      Implementa una conexión a una base de datos utilizando JDBC para almacenar y recuperar información de libros y usuarios. La clase DatabaseManager gestiona la conexión con la BBDD H2 que se arranca en memoria y la clase DataInitializer hace una carga iniciald e datos de ejemplo para problar la BBDD. Luego cada clase DAO maneja las querys necesarias para realizar las operaciones necesarias de cada objeto.
 
 ### 5. Contacto
 Si tienes dudas, puedes enviar un email a [tu-email@example.com].

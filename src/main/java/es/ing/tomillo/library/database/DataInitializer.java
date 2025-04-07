@@ -23,11 +23,11 @@ public class DataInitializer {
     );
 
     private static final List<User> SAMPLE_USERS = Arrays.asList(
-        new User("Juan Pérez", 1),
-        new User("María García", 2),
-        new User("Carlos López", 3),
-        new User("Ana Martínez", 4),
-        new User("Pedro Sánchez", 5)
+        new User("Juan Pérez"),
+        new User("María García"),
+        new User("Carlos López"),
+        new User("Ana Martínez"),
+        new User("Pedro Sánchez")
     );
 
     public static void initializeSampleData() throws SQLException {
@@ -42,10 +42,10 @@ public class DataInitializer {
         }
 
         // Crear algunos préstamos de ejemplo
-        UserDAO.borrowBook(1, 1); // Juan Pérez presta El Quijote
-        UserDAO.borrowBook(2, 2); // María García presta Cien años de soledad
-        UserDAO.borrowBook(3, 3); // Carlos López presta 1984
-        UserDAO.borrowBook(4, 4); // Ana Martínez presta El señor de los anillos
-        UserDAO.borrowBook(5, 5); // Pedro Sánchez presta Orgullo y prejuicio
+        UserDAO.borrowBook(1, "978-84-376-0494-7"); // Juan Pérez presta El Quijote
+        UserDAO.borrowBook(2, "978-84-376-0494-8"); // María García presta Cien años de soledad
+        UserDAO.borrowBook(3, "978-84-376-0494-9"); // Carlos López presta 1984
+        UserDAO.borrowBook(4, "978-84-376-0494-0"); // Ana Martínez presta El señor de los anillos
+        UserDAO.borrowBook(5, "978-84-376-0494-1"); // Pedro Sánchez presta Orgullo y prejuicio
     }
 } 

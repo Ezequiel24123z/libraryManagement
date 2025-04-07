@@ -57,20 +57,28 @@ public class Library {
     // TODO: Implementar método prestarLibro según el ejercicio 3
     public void borrowBook(User user, Book book) {
         try {
-            UserDAO.borrowBook(user.getId(), book.getId());
-            user.borrowBook(book);
+            if (!book.isAvailable()) {
+                System.out.println("El libro no está disponible.");
+                return;
+            }
+            UserDAO.borrowBook(user.getId(), book.getIsbn());
+            book.setAvailable(false);
+            BookDAO.updateBookAvailability(book.getIsbn(), false);
+            System.out.println("Libro prestado con éxito.");
         } catch (SQLException e) {
-            System.err.println("Error al prestar libro en la base de datos: " + e.getMessage());
+            System.out.println("Error al prestar el libro: " + e.getMessage());
         }
     }
 
     // TODO: Implementar método devolverLibro según el ejercicio 3
     public void returnBook(User user, Book book) {
         try {
-            UserDAO.returnBook(user.getId(), book.getId());
-            user.returnBook(book);
+            UserDAO.returnBook(user.getId(), book.getIsbn());
+            book.setAvailable(true);
+            BookDAO.updateBookAvailability(book.getIsbn(), true);
+            System.out.println("Libro devuelto con éxito.");
         } catch (SQLException e) {
-            System.err.println("Error al devolver libro en la base de datos: " + e.getMessage());
+            System.out.println("Error al devolver el libro: " + e.getMessage());
         }
     }
 

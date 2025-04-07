@@ -8,33 +8,37 @@ import java.util.List;
 
 public class BookDAO {
     
+    private static final String INSERT_BOOK = "INSERT INTO books (title, author, isbn, available) VALUES (?, ?, ?, ?)";
+    private static final String SEARCH_BY_TITLE = "SELECT * FROM books WHERE title LIKE ?";
+    private static final String SEARCH_BY_AUTHOR = "SELECT * FROM books WHERE author LIKE ?";
+    private static final String SEARCH_AVAILABLE = "SELECT * FROM books WHERE available = true";
+    private static final String GET_BY_ISBN = "SELECT * FROM books WHERE isbn = ?";
+    private static final String UPDATE_AVAILABILITY = "UPDATE books SET available = ? WHERE isbn = ?";
+    private static final String DELETE_BOOK = "DELETE FROM books WHERE isbn = ?";
+
     public static void insertBook(Book book) throws SQLException {
-        String sql = "INSERT INTO libros (titulo, autor, isbn, disponible) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, book.getTitle());
-            pstmt.setString(2, book.getAuthor());
-            pstmt.setString(3, book.getIsbn());
-            pstmt.setBoolean(4, book.isAvailable());
-            pstmt.executeUpdate();
-        }
+        DatabaseConnection.executeInTransaction(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(INSERT_BOOK)) {
+                stmt.setString(1, book.getTitle());
+                stmt.setString(2, book.getAuthor());
+                stmt.setString(3, book.getIsbn());
+                stmt.setBoolean(4, book.isAvailable());
+                stmt.executeUpdate();
+            }
+        });
     }
 
-    public static Book getBookById(int id) throws SQLException {
-        String sql = "SELECT * FROM libros WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return new Book(
-                    rs.getString("titulo"),
-                    rs.getString("autor"),
-                    rs.getString("isbn")
-                );
+    public static Book getBookByIsbn(String isbn) throws SQLException {
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(GET_BY_ISBN)) {
+            stmt.setString(1, isbn);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return createBookFromResultSet(rs);
+                }
             }
-            return null;
         }
+        return null;
     }
 
     public static List<Book> getAllBooks() throws SQLException {
@@ -56,17 +60,13 @@ public class BookDAO {
 
     public static List<Book> searchBooksByTitle(String title) throws SQLException {
         List<Book> books = new ArrayList<>();
-        String sql = "SELECT * FROM libros WHERE LOWER(titulo) LIKE LOWER(?)";
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, "%" + title + "%");
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                books.add(new Book(
-                    rs.getString("titulo"),
-                    rs.getString("autor"),
-                    rs.getString("isbn")
-                ));
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SEARCH_BY_TITLE)) {
+            stmt.setString(1, "%" + title + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    books.add(createBookFromResultSet(rs));
+                }
             }
         }
         return books;
@@ -74,38 +74,56 @@ public class BookDAO {
 
     public static List<Book> searchBooksByAuthor(String author) throws SQLException {
         List<Book> books = new ArrayList<>();
-        String sql = "SELECT * FROM libros WHERE LOWER(autor) LIKE LOWER(?)";
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, "%" + author + "%");
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                books.add(new Book(
-                    rs.getString("titulo"),
-                    rs.getString("autor"),
-                    rs.getString("isbn")
-                ));
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SEARCH_BY_AUTHOR)) {
+            stmt.setString(1, "%" + author + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    books.add(createBookFromResultSet(rs));
+                }
             }
         }
         return books;
     }
 
-    public static void updateBookAvailability(int bookId, boolean available) throws SQLException {
-        String sql = "UPDATE libros SET disponible = ? WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setBoolean(1, available);
-            pstmt.setInt(2, bookId);
-            pstmt.executeUpdate();
+    public static List<Book> searchAvailableBooks() throws SQLException {
+        List<Book> books = new ArrayList<>();
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SEARCH_AVAILABLE);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                books.add(createBookFromResultSet(rs));
+            }
         }
+        return books;
     }
 
-    public static void deleteBook(int bookId) throws SQLException {
-        String sql = "DELETE FROM libros WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, bookId);
-            pstmt.executeUpdate();
-        }
+    public static void updateBookAvailability(String isbn, boolean available) throws SQLException {
+        DatabaseConnection.executeInTransaction(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(UPDATE_AVAILABILITY)) {
+                stmt.setBoolean(1, available);
+                stmt.setString(2, isbn);
+                stmt.executeUpdate();
+            }
+        });
+    }
+
+    public static void deleteBook(String isbn) throws SQLException {
+        DatabaseConnection.executeInTransaction(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(DELETE_BOOK)) {
+                stmt.setString(1, isbn);
+                stmt.executeUpdate();
+            }
+        });
+    }
+
+    private static Book createBookFromResultSet(ResultSet rs) throws SQLException {
+        Book book = new Book(
+                rs.getString("title"),
+                rs.getString("author"),
+                rs.getString("isbn")
+        );
+        book.setAvailable(rs.getBoolean("available"));
+        return book;
     }
 } 

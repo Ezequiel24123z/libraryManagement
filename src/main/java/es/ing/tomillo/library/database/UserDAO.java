@@ -9,19 +9,23 @@ import java.util.List;
 
 public class UserDAO {
     
+    private static final String INSERT_USER = "INSERT INTO users (name) VALUES (?)";
+    private static final String BORROW_BOOK = "INSERT INTO borrowed_books (user_id, book_isbn) VALUES (?, ?)";
+    private static final String RETURN_BOOK = "DELETE FROM borrowed_books WHERE user_id = ? AND book_isbn = ?";
+
     public static void insertUser(User user) throws SQLException {
-        String sql = "INSERT INTO usuarios (nombre) VALUES (?)";
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            pstmt.setString(1, user.getName());
-            pstmt.executeUpdate();
-            
-            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    user.setId(generatedKeys.getInt(1));
+        DatabaseConnection.executeInTransaction(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
+                stmt.setString(1, user.getName());
+                stmt.executeUpdate();
+
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        user.setId(rs.getInt(1));
+                    }
                 }
             }
-        }
+        });
     }
 
     public static User getUserById(int id) throws SQLException {
@@ -69,30 +73,24 @@ public class UserDAO {
         }
     }
 
-    public static void borrowBook(int userId, int bookId) throws SQLException {
-        String sql = "INSERT INTO prestamos (usuario_id, libro_id) VALUES (?, ?)";
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            pstmt.setInt(2, bookId);
-            pstmt.executeUpdate();
-            
-            // Actualizar disponibilidad del libro
-            BookDAO.updateBookAvailability(bookId, false);
-        }
+    public static void borrowBook(int userId, String bookIsbn) throws SQLException {
+        DatabaseConnection.executeInTransaction(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(BORROW_BOOK)) {
+                stmt.setInt(1, userId);
+                stmt.setString(2, bookIsbn);
+                stmt.executeUpdate();
+            }
+        });
     }
 
-    public static void returnBook(int userId, int bookId) throws SQLException {
-        String sql = "DELETE FROM prestamos WHERE usuario_id = ? AND libro_id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            pstmt.setInt(2, bookId);
-            pstmt.executeUpdate();
-            
-            // Actualizar disponibilidad del libro
-            BookDAO.updateBookAvailability(bookId, true);
-        }
+    public static void returnBook(int userId, String bookIsbn) throws SQLException {
+        DatabaseConnection.executeInTransaction(conn -> {
+            try (PreparedStatement stmt = conn.prepareStatement(RETURN_BOOK)) {
+                stmt.setInt(1, userId);
+                stmt.setString(2, bookIsbn);
+                stmt.executeUpdate();
+            }
+        });
     }
 
     public static List<Book> getBorrowedBooks(int userId) throws SQLException {

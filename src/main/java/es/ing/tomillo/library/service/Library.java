@@ -1,13 +1,12 @@
 package es.ing.tomillo.library.service;
 
-import es.ing.tomillo.library.model.Book;
-import es.ing.tomillo.library.model.User;
+import java.util.List;
+import java.util.Scanner;
+
 import es.ing.tomillo.library.database.BookDAO;
 import es.ing.tomillo.library.database.UserDAO;
-
-import java.sql.SQLException;
-import java.util.Scanner;
-import java.util.List;
+import es.ing.tomillo.library.model.Book;
+import es.ing.tomillo.library.model.User;
 
 public class Library {
     // TODO: Implementar los atributos según el ejercicio 3
@@ -22,8 +21,8 @@ public class Library {
 
     // TODO: Implementar constructor según el ejercicio 3
     public Library() {
-        this.books = new Book[100]; // Maximum 100 books
-        this.users = new User[50]; // Maximum 50 users
+        this.books = new Book[100];
+        this.users = new User[50];
         this.bookCount = 0;
         this.userCount = 0;
     }
@@ -36,7 +35,7 @@ public class Library {
                 books[bookCount] = book;
                 bookCount++;
             }
-        } catch (SQLException e) {
+        } catch (RuntimeException e) {
             System.err.println("Error al añadir libro en la base de datos: " + e.getMessage());
         }
     }
@@ -49,7 +48,7 @@ public class Library {
                 users[userCount] = user;
                 userCount++;
             }
-        } catch (SQLException e) {
+        } catch (RuntimeException e) {
             System.err.println("Error al añadir usuario en la base de datos: " + e.getMessage());
         }
     }
@@ -65,7 +64,7 @@ public class Library {
             book.setAvailable(false);
             BookDAO.updateBookAvailability(book.getIsbn(), false);
             System.out.println("Libro prestado con éxito.");
-        } catch (SQLException e) {
+        } catch (RuntimeException e) {
             System.out.println("Error al prestar el libro: " + e.getMessage());
         }
     }
@@ -77,7 +76,7 @@ public class Library {
             book.setAvailable(true);
             BookDAO.updateBookAvailability(book.getIsbn(), true);
             System.out.println("Libro devuelto con éxito.");
-        } catch (SQLException e) {
+        } catch (RuntimeException e) {
             System.out.println("Error al devolver el libro: " + e.getMessage());
         }
     }
@@ -89,7 +88,7 @@ public class Library {
             if (!books.isEmpty()) {
                 return books.get(0);
             }
-        } catch (SQLException e) {
+        } catch (RuntimeException e) {
             System.err.println("Error al buscar libro por título en la base de datos: " + e.getMessage());
         }
         return null;
@@ -102,7 +101,7 @@ public class Library {
             if (!books.isEmpty()) {
                 return books.get(0);
             }
-        } catch (SQLException e) {
+        } catch (RuntimeException e) {
             System.err.println("Error al buscar libro por autor en la base de datos: " + e.getMessage());
         }
         return null;
@@ -119,7 +118,7 @@ public class Library {
                     System.out.println(book);
                 }
             }
-        } catch (SQLException e) {
+        } catch (RuntimeException e) {
             System.err.println("Error al listar libros disponibles en la base de datos: " + e.getMessage());
         }
     }
@@ -135,8 +134,17 @@ public class Library {
                     System.out.println(user);
                 }
             }
-        } catch (SQLException e) {
+        } catch (RuntimeException e) {
             System.err.println("Error al listar usuarios en la base de datos: " + e.getMessage());
+        }
+    }
+
+    public User getUserById(int id) {
+        try {
+            return UserDAO.getUserById(id);
+        } catch (RuntimeException e) {
+            System.err.println("Error al buscar usuario por ID en la base de datos: " + e.getMessage());
+            return null;
         }
     }
 
@@ -148,7 +156,7 @@ public class Library {
         String isbn;
         Book book = null;
         User user = null;
-        int id=0;
+        int id = 0;
 
         while (!exit) {
             System.out.println("Menu Options:");
@@ -163,7 +171,7 @@ public class Library {
             System.out.println("9. Exit");
             System.out.print("Choose an option: ");
             int option = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (option) {
                 case 1:
@@ -187,10 +195,10 @@ public class Library {
                 case 3:
                     System.out.print("Enter user ID: ");
                     id = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine();
                     System.out.print("Enter book title: ");
                     title = scanner.nextLine();
-                    user = library.users[id];
+                    user = library.getUserById(id);
                     book = library.searchBookByTitle(title);
                     if (user != null && book != null) {
                         library.borrowBook(user, book);
@@ -201,10 +209,10 @@ public class Library {
                 case 4:
                     System.out.print("Enter user ID: ");
                     id = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine();
                     System.out.print("Enter book title: ");
                     title = scanner.nextLine();
-                    user = library.users[id];
+                    user = library.getUserById(id);
                     book = library.searchBookByTitle(title);
                     if (user != null && book != null) {
                         library.returnBook(user, book);

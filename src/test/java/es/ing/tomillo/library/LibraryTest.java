@@ -13,7 +13,7 @@ public class LibraryTest {
         Library library = new Library();
         Book book = new Book("Don Quixote", "Cervantes", "123456789");
         library.addBook(book);
-        assertEquals(book, library.getBooks()[0]);
+        assertEquals(book, library.searchBookByTitle(book.getTitle()));
     }
 
     @Test

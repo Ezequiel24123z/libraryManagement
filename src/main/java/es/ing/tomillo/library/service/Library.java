@@ -61,6 +61,7 @@ public class Library {
                 return;
             }
             UserDAO.borrowBook(user.getId(), book.getIsbn());
+            user.borrowBook(book);
             book.setAvailable(false);
             BookDAO.updateBookAvailability(book.getIsbn(), false);
             System.out.println("Libro prestado con éxito.");

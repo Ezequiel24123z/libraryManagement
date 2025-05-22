@@ -48,10 +48,7 @@ public class DatabaseManager {
             stmt.execute("""
                 CREATE TABLE borrowed_books (
                     user_id INT,
-                    book_isbn VARCHAR(20),
-                    PRIMARY KEY (user_id, book_isbn),
-                    FOREIGN KEY (user_id) REFERENCES users(id),
-                    FOREIGN KEY (book_isbn) REFERENCES books(isbn)
+                    book_isbn VARCHAR(20)
                 )
             """);
             System.out.println("Tabla 'borrowed_books' creada correctamente");

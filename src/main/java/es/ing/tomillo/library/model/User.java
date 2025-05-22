@@ -84,10 +84,9 @@ public class User {
     // TODO: Implementar método mostrarInformacion según el ejercicio 2
     @Override
     public String toString() {
-        return "User{" +
+        return "User: " +
                 "name='" + name + '\'' +
-                ", id=" + id +
-                '}';
+                ", id=" + id;
     }
 
     // TODO: Implementar método equals para comparar usuarios por ID

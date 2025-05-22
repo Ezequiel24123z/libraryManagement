@@ -188,9 +188,7 @@ public class Library {
                 case 2:
                     System.out.print("Enter user name: ");
                     String name = scanner.nextLine();
-                    System.out.print("Enter user ID: ");
-                    id = scanner.nextInt();
-                    user = new User(name, id);
+                    user = new User(name);
                     library.addUser(user);
                     break;
                 case 3:

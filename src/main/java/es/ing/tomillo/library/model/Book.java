@@ -55,7 +55,7 @@ public class Book {
     // TODO: Implementar método toString según el ejercicio 1
     @Override
     public String toString() {
-        return "Book: " + title + " by " + author + " ISBN: " + isbn + " Available: " + available;
+        return "Book: " + title + ", Author: " + author + " ISBN: " + isbn + " Available: " + available;
     }
 
     // TODO: Implementar método equals para comparar libros por ISBN

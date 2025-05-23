@@ -55,7 +55,10 @@ Asegúrate de tener instalado Java y Maven.
       Implementa un método reserveBook en la clase User para reservar libros que no están disponibles.
 ##### Extra extra:
       En la rama del repositorio de github denomidada bbdd, está implementada una conexión a una base de datos 
-      utilizando JDBC para almacenar y recuperar información de libros y usuarios. Haz uso de la clase LibraryJDBC
+      utilizando JDBC para almacenar y recuperar información de libros y usuarios. Haz uso de la clase LibraryJDBC, y
+      de las clases DAO, UserDAO y BookDAO
+      Todas las funcionalidades de usuario están funcionando:
+      Faltan las sentencias SQL de la clase Libros, BookDAO, para que funcione totalmente la biblioteca
 
 ### 6. Contacto
 Si tienes dudas, [nos puedes enviar un email](ing-tomillo-java@ing.com)

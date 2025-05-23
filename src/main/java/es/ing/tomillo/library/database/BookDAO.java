@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class BookDAO extends BaseDAO {
-    private static final String INSERT_BOOK = "INSERT INTO books (title, author, isbn, available) VALUES (?, ?, ?, ?)";
-    private static final String SEARCH_BY_TITLE = "SELECT * FROM books WHERE title LIKE ?";
-    private static final String SEARCH_BY_AUTHOR = "SELECT * FROM books WHERE author LIKE ?";
-    private static final String SEARCH_AVAILABLE = "SELECT * FROM books WHERE available = true";
-    private static final String GET_BY_ISBN = "SELECT * FROM books WHERE isbn = ?";
-    private static final String UPDATE_AVAILABILITY = "UPDATE books SET available = ? WHERE isbn = ?";
-    private static final String DELETE_BOOK = "DELETE FROM books WHERE isbn = ?";
+    private static final String INSERT_BOOK = "";
+    private static final String SEARCH_BY_TITLE = "";
+    private static final String SEARCH_BY_AUTHOR = "";
+    private static final String SEARCH_AVAILABLE = "";
+    private static final String GET_BY_ISBN = "";
+    private static final String UPDATE_AVAILABILITY = "";
+    private static final String DELETE_BOOK = "";
 
     public static void insertBook(Book book) {
         executeUpdate(INSERT_BOOK, book.getTitle(), book.getAuthor(), book.getIsbn(), book.isAvailable());

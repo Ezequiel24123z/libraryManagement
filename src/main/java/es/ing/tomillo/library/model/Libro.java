@@ -10,13 +10,12 @@ public class Libro {
     private boolean disponibilidad;
 
     // Implementación del constructor
-    public Libro(String titulo, String autor, String isbn, boolean disponibilidad) {
+    public Libro(String titulo, String autor, String isbn) {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
-        this.disponibilidad = disponibilidad;
+        this.disponibilidad = true;
     }
-
     // Implementación de los getters
     public String getTitulo() {
         return titulo;

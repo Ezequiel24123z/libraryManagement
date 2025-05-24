@@ -27,13 +27,23 @@ public class Library {
     }
 
     // Metodo para devolver libros
-    public void devolverLibro(Libro libro) {
-        if
+    public void devolverLibro(Usuario usuarioQueDevuelveElLibro, Libro libro) {
+        if (!usuarioQueDevuelveElLibro.getLibrosPrestados().contains(libro)) {
+            System.out.print("El usuario  " + usuarioQueDevuelveElLibro.getNombre() + " no tiene el libro prestado");
+            return;
+        }
+
+
+
+
+
+
+
 
         }
 
 
-    }
+
 
 
         // Cargar datos de ejemplo

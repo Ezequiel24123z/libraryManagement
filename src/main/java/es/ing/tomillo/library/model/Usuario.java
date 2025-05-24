@@ -67,6 +67,7 @@ public class Usuario {
         librosPrestados.add(libro);
     }
 
+
     // Eliminar Libro de la lista de libros prestados
     public void eliminarLibroPrestado(Libro libro) {
         librosPrestados.remove(libro);

@@ -120,8 +120,11 @@ public class Libreria {
     }
 
     // TODO: Implementar método buscarLibroPorAutor según el ejercicio 4
-    public Book searchBookByAuthor(String author) {
-
+    public Libro buscarLibroPorAutor(String autor) {
+        for (Libro autorBuscado : libros) {
+            if (autorBuscado.getAutor().equalsIgnoreCase(autor))
+                return autorBuscado;
+        }
         return null;
     }
 

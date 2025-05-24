@@ -7,8 +7,8 @@ public class Libro {
 
     // Atributos que tendrá la clase Libro
 
-    private static int nextBookID = 0;
-    private final int BookID;
+    private static int nextLibroID = 0;
+    private final int LibroID;
     private String titulo;
     private String autor;
     private String isbn;
@@ -17,7 +17,7 @@ public class Libro {
 
     // Implementación del constructor
     public Libro(String titulo, String autor, String isbn) {
-        this.BookID = nextBookID++;
+        this.LibroID = nextLibroID++;
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;

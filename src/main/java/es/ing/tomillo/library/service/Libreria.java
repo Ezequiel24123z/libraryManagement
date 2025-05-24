@@ -55,8 +55,8 @@ public class Libreria {
     }
 
     // Metodo para crear un usuario
-    public void crearYAgregarUsuario(String nombre, int id) {
-        Usuario nuevoUsuario = new Usuario(nombre, id);
+    public void crearYAgregarUsuario(String nombre) {
+        Usuario nuevoUsuario = new Usuario(nombre);
         usuarios.add(nuevoUsuario);
         System.out.println("Usuario creado y añadido: " + nuevoUsuario);
     }
@@ -188,29 +188,30 @@ public class Libreria {
             switch (option) {
 
                 case 1: //Añadir libro a la biblioteca
-                    System.out.print("Enter book title: ");
-                    titulo = scanner.nextLine();
-                    System.out.print("Enter book author: ");
-                    String autor = scanner.nextLine();
-                    System.out.print("Enter book ISBN: ");
-                    isbn = scanner.nextLine();
+                    System.out.print("Insertar titulo del libro: ");
+                    titulo = scanner.nextLine().trim();
+                    System.out.print("Insertar autor del libro: ");
+                    String autor = scanner.nextLine().trim();
+                    System.out.print("Insertar ISBN del libro: ");
+                    isbn = scanner.nextLine().trim();
                     if (titulo.isEmpty() || autor.isEmpty() || isbn.isEmpty()) {
                         System.out.println("Error: No se pueden dejar campos vacíos.");
                     } else {
                         libreria.crearYAgregarLibro(titulo, autor, isbn);
                     }
                     break;
-                    libreria.crearYAgregarLibro(titulo, autor, isbn);
+
+                case 2: //Añadir usuario a la biblioteca
+                    System.out.print("Insertar nombre del usuario: ");
+                    String nombre = scanner.nextLine().trim();
+                    if (nombre.isEmpty()) {
+                        System.out.println("Error, el nombre no puede estar vacío");
+                    }
+                    else {
+                        libreria.crearYAgregarUsuario(nombre);
+                    }
                     break;
 
-                case 2:
-                    System.out.print("Enter user name: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Enter user ID: ");
-                    id = scanner.nextInt();
-                    user = new User(name, id);
-                    library.addUser(user);
-                    break;
                 case 3:
                     System.out.print("Enter user ID: ");
                     id = scanner.nextInt();

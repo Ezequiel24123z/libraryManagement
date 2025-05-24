@@ -11,6 +11,9 @@ import java.util.Collections;
 public class Usuario {
 
     // Inicialización de atributos para la clase Usuario
+    private static int nextUsuarioID = 0;
+    private final int UsuarioID;
+
     private String nombre;
     private int id;
     private final List<Libro> librosPrestados;
@@ -19,9 +22,9 @@ public class Usuario {
     private static final int MAX_LIBROS_PRESTADOS = 5;
 
     // Constructor con un maximo de 5 libros prestados
-    public Usuario(String nombre, int id) {
+    public Usuario(String nombre) {
         this.nombre = nombre;
-        this.id = id;
+        this.id = nextUsuarioID++;;
         this.librosReservado = new ArrayList<>();
         this.librosPrestados = new ArrayList<>();
     }

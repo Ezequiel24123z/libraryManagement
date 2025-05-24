@@ -8,6 +8,7 @@ public class Libro {
     private String autor;
     private String isbn;
     private boolean disponibilidad;
+    private boolean reservado;
 
     // Implementación del constructor
     public Libro(String titulo, String autor, String isbn) {
@@ -15,6 +16,7 @@ public class Libro {
         this.autor = autor;
         this.isbn = isbn;
         this.disponibilidad = true;
+        this.reservado = false;
     }
     // Implementación de los getters
     public String getTitulo() {
@@ -32,10 +34,17 @@ public class Libro {
     public boolean isDisponibilidad() {
         return disponibilidad;
     }
+    public boolean isReservado() {
+        return reservado;
+    }
 
     // Implementación de los setters
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public void setReservado(boolean reservado) {
+        this.reservado = reservado;
     }
 
     public void setAutor(String autor) {

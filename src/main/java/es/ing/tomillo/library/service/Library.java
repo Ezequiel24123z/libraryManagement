@@ -1,7 +1,7 @@
 package es.ing.tomillo.library.service;
 
-import es.ing.tomillo.library.model.Book;
-import es.ing.tomillo.library.model.User;
+import es.ing.tomillo.library.model.Libro;
+import es.ing.tomillo.library.model.Usuario;
 import es.ing.tomillo.library.util.SampleData;
 
 import java.util.ArrayList;
@@ -9,22 +9,22 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Library {
-    // Lista de usuarios
-    private final List<User> users;
-    // Lista de libros
-    private final List<Book> books;
+    // Atributos
+    private final List<Usuario> usuarios;
+    private final List<Libro> libros;
 
+    // Constructor
     public Library() {
-        this.users = new ArrayList<>();
-        this.books = new ArrayList<>();
-        
+        this.usuarios = new ArrayList<>();
+        this.libros = new ArrayList<>();
+
         // Cargar datos de ejemplo
         loadSampleData();
     }
 
     private void loadSampleData() {
         // Cargar usuarios de ejemplo
-        users.addAll(SampleData.SAMPLE_USERS);
+        usuarios.addAll(SampleData.SAMPLE_USERS);
 
         // Cargar libros de ejemplo
 

@@ -1,5 +1,6 @@
 package es.ing.tomillo.library.model;
 
+import es.ing.tomillo.library.service.Library;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +42,7 @@ public class Usuario {
     public int getLibrosPrestadosNumero() {
         return librosPrestados.size();
     }
-    
+
     // Implementación de setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -50,7 +51,7 @@ public class Usuario {
         this.id = id;
     }
 
-    // Función para prestar un libro
+    // Metodo para prestar un libro
     public void prestarLibro(Libro libro) {
         if (librosPrestados.size() >= MAX_LIBROS_PRESTADOS) {
             System.out.println("Máximo numero de libros prestados, imposible prestar mas");
@@ -65,19 +66,41 @@ public class Usuario {
         }
     }
 
-    // Debe eliminar un libro a lista de libros prestados
+    // Metodo para devolver libros
     public void devolverLibro(Libro libro) {
             if (librosPrestados.contains(libro)) {
                 librosPrestados.remove(libro);
+                for (Usuario usuario : usuarios) {
+                    if ()
+
+                }
             }
             else { System.out.println(libro.getTitulo() + " imposible devolver, no esta prestado");
             }
     }
 
-    // TODO: Implementar método reservarLibro según el ejercicio 2
-    // Debe permitir reservar libros que no están disponibles
-    public void reserveBook(Book book) {
-
+    // Metodo para reservar libros
+    public void reservarLibro(Libro libro) {
+        if (librosReservado.contains(libro)) {
+            System.out.println("Usted ya tiene reservado el libro " + libro.getTitulo() + ", imposible reservar");
+        }
+        else if (libro.isReservado()) {
+            System.out.println("El libro " + libro.getTitulo() + " ya se encuentra reservado, imposible reservar");
+        }
+        else if (librosPrestados.contains(libro)) {
+            System.out.println("Usted tiene prestado el libro " + libro.getTitulo() + ", imposible reservar");
+        }
+        else if (libro.isDisponibilidad()) {
+            System.out.println("El libro " + libro.getTitulo() + " se encuentra disponible, no se ha efectuado la reserva");
+        }
+        else if (librosReservado.size() >= MAX_LIBROS_RESERVADOS) {
+            System.out.println("Límite de reservas alcanzado. No puede reservar más libros.");
+        }
+        else {
+            librosReservado.add(libro);
+            libro.setReservado(true);
+            System.out.println(libro.getTitulo() + " reservado");
+        }
     }
 
     // TODO: Implementar método toString para mostrar la información del usuario

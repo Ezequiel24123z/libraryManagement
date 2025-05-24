@@ -213,18 +213,18 @@ public class Libreria {
                     break;
 
                 case 3:
-                    System.out.print("Enter user ID: ");
-                    id = scanner.nextInt();
+                    System.out.print("Insertar nombre del usuario: ");
+                    nombre = scanner.nextLine().trim();
                     scanner.nextLine(); // Consume newline
-                    System.out.print("Enter book title: ");
-                    title = scanner.nextLine();
-                    user = library.getUserById(id);
-                    book = library.searchBookByTitle(title);
-                    if (user != null && book != null) {
-                        library.borrowBook(user, book);
+                    System.out.print("Insertar titulo del libro: ");
+                    titulo = scanner.nextLine().trim();
+                    if (nombre.isEmpty() || titulo.isEmpty()) {
+                        System.out.println("Error: No se pueden dejar campos vacíos.");
                     } else {
-                        System.out.println("User or book not found.");
-                    }
+                        Usuario usuario = null;
+                        for (Usuario u : libreria.getListaUsuarios()) {
+                            if (u.getNombre().equalsIgnoreCase(nombre)) {
+                                usuario = u;
                     break;
                 case 4:
                     System.out.print("Enter user ID: ");

@@ -1,11 +1,14 @@
 package es.ing.tomillo.library.model;
 
 import java.util.Objects;
+import java.util.Date;
 
 public class Libro {
 
     // Atributos que tendrá la clase Libro
 
+    private static int nextBookID = 0;
+    private final int BookID;
     private String titulo;
     private String autor;
     private String isbn;
@@ -14,6 +17,7 @@ public class Libro {
 
     // Implementación del constructor
     public Libro(String titulo, String autor, String isbn) {
+        this.BookID = nextBookID++;
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;

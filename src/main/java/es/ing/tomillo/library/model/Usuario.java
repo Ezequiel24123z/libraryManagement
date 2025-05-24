@@ -6,15 +6,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Collections;
 
+
+
 public class Usuario {
 
     // Inicialización de atributos para la clase Usuario
     private String nombre;
     private int id;
     private final List<Libro> librosPrestados;
-    private static final int MAX_LIBROS_PRESTADOS = 5;
     private final List<Libro> librosReservado;
     private static final int MAX_LIBROS_RESERVADOS = 2;
+    private static final int MAX_LIBROS_PRESTADOS = 5;
 
     // Constructor con un maximo de 5 libros prestados
     public Usuario(String nombre, int id) {
@@ -54,21 +56,14 @@ public class Usuario {
         this.id = id;
     }
 
-    // Metodo para prestar un libro
-    public void prestarLibro(Libro libro) {
+    // Agregar Libro a la lista
+    public void agregarLibroPrestado(Libro libro) {
         if (librosPrestados.size() >= MAX_LIBROS_PRESTADOS) {
-            System.out.println("Máximo numero de libros prestados, imposible prestar mas");
-
-        } else if (!libro.isDisponibilidad()) {
-            System.out.println("El libro "+libro.getTitulo()+"no se encuentra disponible");
-
-        } else {
-            librosPrestados.add(libro);
-            libro.setDisponibilidad(false);
-            System.out.println(libro.getTitulo() + " prestado");
+            System.out.println("Máximo numero de libros prestados para " + nombre);
+            return;
         }
+        librosPrestados.add(libro);
     }
-
 
     // Metodo para reservar libros
     public void reservarLibro(Libro libro) {

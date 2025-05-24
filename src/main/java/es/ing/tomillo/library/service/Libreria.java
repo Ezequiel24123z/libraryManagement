@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Libreria {
     // Atributos
     private final List<Usuario> usuarios;
     private final List<Libro> libros;
+    private static final int MAX_LIBROS_PRESTADOS = 5;
 
     // Constructor
     public Libreria() {
@@ -39,7 +41,7 @@ public class Libreria {
             if (usuario.equals(usuarioQueDevuelveElLibro)) continue;
             if (usuario.getLibrosReservado().contains(libroDevuelto)) {
                 if (usuario.getLibrosPrestadosNumero() < 5) {
-                    usuario.prestarLibro(libroDevuelto);
+                    prestarLibro(libroDevuelto);
                     usuario.getLibrosReservado().remove(libroDevuelto);
                     libroDevuelto.setReservado(false);
                     libroDevuelto.setDisponibilidad(false);
@@ -68,17 +70,21 @@ public class Libreria {
         }
     }
 
-    public void añadirUsuario(Usuario usuarioañadido) {
-        users.add(user);
-    }
-
-    public void añadirLibro(Libro libroañadido) {
-
-    }
-
     // TODO: Implementar método prestarLibro según el ejercicio 3
-    public void borrowBook(User user, Book book) {
-        user.borrowBook(book);
+
+    // Metodo para prestar un libro
+    public void prestarLibro(Usuario usuarioPrestar, Libro libroPrestar) {
+        if (usuarioPrestar.getLibrosPrestadosNumero() >= MAX_LIBROS_PRESTADOS) {
+            System.out.println("Máximo numero de libros prestados, imposible prestar mas");
+
+        } else if (!libroPrestar.isDisponibilidad()) {
+            System.out.println("El libro "+libroPrestar.getTitulo()+"no se encuentra disponible");
+
+        } else {
+            usuarioPrestar.agregarLibroPrestado(libroPrestar);
+            libroPrestar.setDisponibilidad(false);
+            System.out.println(libroPrestar.getTitulo() + " prestado");
+        }
     }
 
     // TODO: Implementar método devolverLibro según el ejercicio 3

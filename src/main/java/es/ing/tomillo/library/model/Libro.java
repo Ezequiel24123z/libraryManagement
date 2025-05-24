@@ -1,5 +1,7 @@
 package es.ing.tomillo.library.model;
 
+import java.util.Objects;
+
 public class Libro {
 
     // Atributos que tendrá la clase Libro
@@ -81,6 +83,10 @@ public class Libro {
 
         return this.isbn.equals(segundoLibro.getIsbn()); //Devuelve un boolean (true o false) en la comparación de los dos libros
 
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(isbn);
     }
 }
 

@@ -1,6 +1,6 @@
 package es.ing.tomillo.library.model;
 
-import es.ing.tomillo.library.service.Library;
+import es.ing.tomillo.library.service.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -41,6 +41,9 @@ public class Usuario {
 
     public int getLibrosPrestadosNumero() {
         return librosPrestados.size();
+    }
+    public List<Libro> getLibrosReservado() {
+        return Collections.unmodifiableList(librosReservado);
     }
 
     // Implementación de setters
@@ -91,7 +94,12 @@ public class Usuario {
         }
     }
 
-    // TODO: Implementar método toString para mostrar la información del usuario
+    // Metodo para comprobar si el libro esta prestado
+    public boolean tieneLibroPrestado(Libro libro) {
+        return librosPrestados.contains(libro);
+    }
+
+    // Metodo toString para mostrar la información del usuario
     @Override
     public String toString() {
         return "User{" +
@@ -101,7 +109,7 @@ public class Usuario {
                 '}';
     }
 
-    // TODO: Implementar método equals para comparar usuarios por ID
+    // Metodo equals para comparar usuarios por ID
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

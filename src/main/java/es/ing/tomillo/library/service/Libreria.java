@@ -24,6 +24,7 @@ public class Libreria {
     public List<Usuario> getListaUsuarios() {
         return usuarios;
     }
+
     public List<Libro> getListaLibros() {
         return libros;
     }
@@ -64,12 +65,12 @@ public class Libreria {
                     usuario.getLibrosReservado().remove(libroDevuelto);
                     libroDevuelto.setReservado(false);
                     libroDevuelto.setDisponibilidad(false);
-                    System.out.println("El libro " + libroDevuelto.getTitulo() + " ha sido prestado automáticamente a "+ usuario.getNombre());
+                    System.out.println("El libro " + libroDevuelto.getTitulo() + " ha sido prestado automáticamente a " + usuario.getNombre());
                     break;
-                    }
                 }
             }
         }
+    }
 
     // Metodo para prestar un libro
     public void prestarLibro(Usuario usuarioPrestar, Libro libroPrestar) {
@@ -77,7 +78,7 @@ public class Libreria {
             System.out.println("Máximo numero de libros prestados, imposible prestar mas");
 
         } else if (!libroPrestar.isDisponibilidad()) {
-            System.out.println("El libro "+libroPrestar.getTitulo()+"no se encuentra disponible");
+            System.out.println("El libro " + libroPrestar.getTitulo() + "no se encuentra disponible");
 
         } else {
             usuarioPrestar.agregarLibroPrestado(libroPrestar);
@@ -90,27 +91,22 @@ public class Libreria {
     public void reservarLibro(Usuario usuarioReservar, Libro libroReservar) {
         if (usuarioReservar.getLibrosReservado().contains(libroReservar)) {
             System.out.println("El usuario " + usuarioReservar.getNombre() + " ya tiene reservado el libro " + libroReservar.getTitulo() + ", imposible reservar");
-        }
-        else if (libroReservar.isReservado()) {
+        } else if (libroReservar.isReservado()) {
             System.out.println("El libro " + libroReservar.getTitulo() + " ya se encuentra reservado, imposible reservar");
-        }
-        else if (usuarioReservar.getLibrosPrestados().contains(libroReservar)) {
+        } else if (usuarioReservar.getLibrosPrestados().contains(libroReservar)) {
             System.out.println("El usuario " + usuarioReservar.getNombre() + " tiene prestado el libro " + libroReservar.getTitulo() + ", imposible reservar");
-        }
-        else if (libroReservar.isDisponibilidad()) {
+        } else if (libroReservar.isDisponibilidad()) {
             System.out.println("El libro " + libroReservar.getTitulo() + " se encuentra disponible, no se ha efectuado la reserva");
-        }
-        else if (usuarioReservar.getLibrosReservado().size() >= MAX_LIBROS_RESERVADOS) {
+        } else if (usuarioReservar.getLibrosReservado().size() >= MAX_LIBROS_RESERVADOS) {
             System.out.println("Límite de reservas alcanzado para el usuario " + usuarioReservar.getNombre() + ". No puede reservar más libros.");
-        }
-        else {
+        } else {
             usuarioReservar.getLibrosReservado().add(libroReservar);
             libroReservar.setReservado(true);
             System.out.println("El libro " + libroReservar.getTitulo() + " ha sido reservado para el usuario " + usuarioReservar.getNombre());
         }
     }
 
-    // TODO: Implementar método buscarLibroPorTitulo según el ejercicio 4
+    // Implementar metodo buscarLibroPorTitulo
     public Libro buscarLibroPorTitulo(String titulo) {
         for (Libro libroBuscado : libros) {
             if (libroBuscado.getTitulo().equalsIgnoreCase(titulo))
@@ -119,37 +115,42 @@ public class Libreria {
         return null;
     }
 
-    // TODO: Implementar método buscarLibroPorAutor según el ejercicio 4
+    // Implementar metodo buscarLibroPorAutor
     public Libro buscarLibroPorAutor(String autor) {
-        for (Libro autorBuscado : libros) {
-            if (autorBuscado.getAutor().equalsIgnoreCase(autor))
-                return autorBuscado;
+        for (Libro libro : libros) {
+            if (libro.getAutor().equalsIgnoreCase(autor))
+                return libro;
         }
         return null;
     }
 
-    // TODO: Implementar método listarLibrosDisponibles según el ejercicio 5
-    // Debe mostrar por pantalla todos los libros que están disponibles (isAvailable = true)
-    public void listAvailableBooks() {
-
+    // Implementar metodo listarLibrosDisponibles según el ejercicio 5
+    public List<Libro> listarLibrosDisponibles() {
+        List<Libro> librosDisponibles = new ArrayList<>();
+        for (Libro libro : libros) {
+            if (libro.isDisponibilidad()) {
+                librosDisponibles.add(libro);
+            }
+        }
+        return librosDisponibles;
     }
 
-    public User getUserById(int id) {
-        for (User user : users) {
-            if (user.getId() == id) {
-                return user;
+    public Usuario buscarUsuarioPorID(int id) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId() == id) {
+                return usuario;
             }
         }
         return null;
     }
 
     public static void main(String[] args) {
-        Library library = new Library();
+        Libreria libreria = new Libreria();
         Scanner scanner = new Scanner(System.in);
-        boolean exit = false;
-        String title;
+        boolean salir = false;
+        String titulo;
         String isbn;
-        Book book = null;
+        Libro libro = null;
         User user = null;
         int id = 0;
 

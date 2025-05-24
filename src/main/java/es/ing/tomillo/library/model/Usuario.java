@@ -12,10 +12,9 @@ public class Usuario {
 
     // Inicialización de atributos para la clase Usuario
     private static int nextUsuarioID = 0;
-    private final int UsuarioID;
+    private final int id;
 
     private String nombre;
-    private int id;
     private final List<Libro> librosPrestados;
     private final List<Libro> librosReservado;
     private static final int MAX_LIBROS_RESERVADOS = 2;

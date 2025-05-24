@@ -20,6 +20,15 @@ public class Library {
         loadSampleData(); // Cargar datos de ejemplo
     }
 
+    public List<Usuario> getListaUsuarios() {
+        return usuarios;
+    }
+    public List<Libro> getListaLibros() {
+        return libros;
+    }
+
+
+
     private void loadSampleData() {
         // Cargar usuarios de ejemplo
         usuarios.addAll(SampleData.SAMPLE_USERS);

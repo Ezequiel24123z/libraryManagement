@@ -71,7 +71,6 @@ public class Libro {
         return "Libro{" + "titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn + ", disponibilidad=" + disponibilidad + '}';
     }
 
-
     // Implementar metodo equals para comparar libros por ISBN
     @Override
     public boolean equals(Object obj) {

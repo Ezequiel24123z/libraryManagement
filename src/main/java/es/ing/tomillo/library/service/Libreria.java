@@ -47,6 +47,20 @@ public class Libreria {
         System.out.println("- " + libros.size() + " libros");
     }
 
+    // Metodo para crear un libro
+    public void crearYAgregarLibro(String titulo, String autor, String isbn) {
+        Libro nuevoLibro = new Libro(titulo, autor, isbn);
+        libros.add(nuevoLibro);
+        System.out.println("Libro creado y añadido: " + nuevoLibro);
+    }
+
+    // Metodo para crear un usuario
+    public void crearYAgregarUsuario(String nombre, int id) {
+        Usuario nuevoUsuario = new Usuario(nombre, id);
+        usuarios.add(nuevoUsuario);
+        System.out.println("Usuario creado y añadido: " + nuevoUsuario);
+    }
+
     // Metodo para devolver libros
     public void devolverLibro(Usuario usuarioQueDevuelveElLibro, Libro libroDevuelto) {
         if (!usuarioQueDevuelveElLibro.getLibrosPrestados().contains(libroDevuelto)) {
@@ -180,7 +194,7 @@ public class Libreria {
                     System.out.print("Enter book ISBN: ");
                     isbn = scanner.nextLine();
                     //book = new Book(title, author, isbn);
-                    libreria.addBook(book);
+                    libreria.;
                     break;
                 case 2:
                     System.out.print("Enter user name: ");

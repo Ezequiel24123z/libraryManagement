@@ -61,18 +61,18 @@ public class Libreria {
 
     // Mostrar por pantalla todos los usuarios registrados en la biblioteca
     public void listUsers() {
-        for (User user : users) {
-            System.out.println("ID: " + user.getId());
-            System.out.println("Nombre: " + user.getName());
-            System.out.println("Número de libros reservados: " + user.getBookCount());
+        for (Usuario usuario : usuarios) {
+            System.out.println("ID: " + usuario.getId());
+            System.out.println("Nombre: " + usuario.getNombre());
+            System.out.println("Número de libros reservados: " + usuario.getLibrosPrestadosNumero());
         }
     }
 
-    public void addUser(User user) {
+    public void añadirUsuario(Usuario usuarioañadido) {
         users.add(user);
     }
 
-    public void addBook(Book book) {
+    public void añadirLibro(Libro libroañadido) {
 
     }
 

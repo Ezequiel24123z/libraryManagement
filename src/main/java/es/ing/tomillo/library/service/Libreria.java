@@ -110,14 +110,12 @@ public class Libreria {
         }
     }
 
-    // TODO: Implementar método devolverLibro según el ejercicio 3
-    public void returnBook(User user, Book book) {
-        user.returnBook(book);
-    }
-
     // TODO: Implementar método buscarLibroPorTitulo según el ejercicio 4
-    public Book searchBookByTitle(String title) {
-
+    public Libro buscarLibroPorTitulo(String titulo) {
+        for (Libro libroBuscado : libros) {
+            if (libroBuscado.getTitulo().equalsIgnoreCase(titulo))
+                return libroBuscado;
+        }
         return null;
     }
 

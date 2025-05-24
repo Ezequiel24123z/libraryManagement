@@ -56,13 +56,18 @@ public class Usuario {
         this.id = id;
     }
 
-    // Agregar Libro a la lista
+    // Agregar Libro a la lista de libros prestados
     public void agregarLibroPrestado(Libro libro) {
         if (librosPrestados.size() >= MAX_LIBROS_PRESTADOS) {
             System.out.println("Máximo numero de libros prestados para " + nombre);
             return;
         }
         librosPrestados.add(libro);
+    }
+
+    // Eliminar Libro de la lista de libros prestados
+    public void eliminarLibroPrestado(Libro libro) {
+        librosPrestados.remove(libro);
     }
 
     // Metodo para reservar libros

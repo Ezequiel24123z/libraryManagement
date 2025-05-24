@@ -41,7 +41,7 @@ public class Libreria {
             if (usuario.equals(usuarioQueDevuelveElLibro)) continue;
             if (usuario.getLibrosReservado().contains(libroDevuelto)) {
                 if (usuario.getLibrosPrestadosNumero() < 5) {
-                    prestarLibro(libroDevuelto);
+                    prestarLibro(usuario, libroDevuelto);
                     usuario.getLibrosReservado().remove(libroDevuelto);
                     libroDevuelto.setReservado(false);
                     libroDevuelto.setDisponibilidad(false);
@@ -73,7 +73,7 @@ public class Libreria {
     // TODO: Implementar método prestarLibro según el ejercicio 3
 
     // Metodo para prestar un libro
-    public void prestarLibro(Usuario usuarioPrestar, Libro libroPrestar) {
+    public void prestarLibro(Usuario usuario, Libro libroPrestar) {
         if (usuarioPrestar.getLibrosPrestadosNumero() >= MAX_LIBROS_PRESTADOS) {
             System.out.println("Máximo numero de libros prestados, imposible prestar mas");
 

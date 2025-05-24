@@ -17,9 +17,7 @@ public class Library {
     public Library() {
         this.usuarios = new ArrayList<>();
         this.libros = new ArrayList<>();
-
-        // Cargar datos de ejemplo
-        loadSampleData();
+        loadSampleData(); // Cargar datos de ejemplo
     }
 
     private void loadSampleData() {

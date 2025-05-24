@@ -17,10 +17,10 @@ public class Usuario {
     private static final int MAX_LIBROS_RESERVADOS = 2;
 
     // Constructor con un maximo de 5 libros prestados
-    public Usuario(String nombre, int id, List<Libro> librosReservado) {
+    public Usuario(String nombre, int id) {
         this.nombre = nombre;
         this.id = id;
-        this.librosReservado = new ArrayList<>(librosReservado);
+        this.librosReservado = new ArrayList<>();
         this.librosPrestados = new ArrayList<>();
     }
 

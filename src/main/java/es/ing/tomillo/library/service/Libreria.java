@@ -116,12 +116,14 @@ public class Libreria {
     }
 
     // Implementar metodo buscarLibroPorAutor
-    public Libro buscarLibroPorAutor(String autor) {
+    public List<Libro> buscarLibroPorAutor(String autor) {
+        List<Libro> librosPorAutor = new ArrayList<>();
         for (Libro libro : libros) {
-            if (libro.getAutor().equalsIgnoreCase(autor))
-                return libro;
+            if (libro.getAutor().equalsIgnoreCase(autor)) {
+                librosPorAutor.add(libro);
+            }
         }
-        return null;
+        return librosPorAutor;
     }
 
     // Implementar metodo listarLibrosDisponibles según el ejercicio 5
@@ -151,20 +153,20 @@ public class Libreria {
         String titulo;
         String isbn;
         Libro libro = null;
-        User user = null;
+        Usuario usuario = null;
         int id = 0;
 
-        while (!exit) {
-            System.out.println("Menu Options:");
-            System.out.println("1. Add Book");
-            System.out.println("2. Add User");
-            System.out.println("3. Borrow Book");
-            System.out.println("4. Return Book");
-            System.out.println("5. Search Book by Title");
-            System.out.println("6. Search Book by Author");
-            System.out.println("7. List Available Books");
-            System.out.println("8. List Users");
-            System.out.println("9. Exit");
+        while (!salir) {
+            System.out.println("Opciones:");
+            System.out.println("1. Añadir libro");
+            System.out.println("2. Añadir usuario");
+            System.out.println("3. Prestar libro");
+            System.out.println("4. Devolver libro");
+            System.out.println("5. Buscar libro por titulo");
+            System.out.println("6. Buscar libro por autor");
+            System.out.println("7. Mostrar libros disponibles");
+            System.out.println("8. Mostrar usuarios");
+            System.out.println("9. Salir");
             System.out.print("Choose an option: ");
             int option = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -172,13 +174,13 @@ public class Libreria {
             switch (option) {
                 case 1:
                     System.out.print("Enter book title: ");
-                    title = scanner.nextLine();
+                    titulo = scanner.nextLine();
                     System.out.print("Enter book author: ");
-                    String author = scanner.nextLine();
+                    String autor = scanner.nextLine();
                     System.out.print("Enter book ISBN: ");
                     isbn = scanner.nextLine();
                     //book = new Book(title, author, isbn);
-                    library.addBook(book);
+                    libreria.addBook(book);
                     break;
                 case 2:
                     System.out.print("Enter user name: ");

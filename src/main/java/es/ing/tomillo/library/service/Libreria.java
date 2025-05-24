@@ -186,16 +186,23 @@ public class Libreria {
             scanner.nextLine(); // Consume newline
 
             switch (option) {
-                case 1:
+
+                case 1: //Añadir libro a la biblioteca
                     System.out.print("Enter book title: ");
                     titulo = scanner.nextLine();
                     System.out.print("Enter book author: ");
                     String autor = scanner.nextLine();
                     System.out.print("Enter book ISBN: ");
                     isbn = scanner.nextLine();
-                    //book = new Book(title, author, isbn);
-                    libreria.;
+                    if (titulo.isEmpty() || autor.isEmpty() || isbn.isEmpty()) {
+                        System.out.println("Error: No se pueden dejar campos vacíos.");
+                    } else {
+                        libreria.crearYAgregarLibro(titulo, autor, isbn);
+                    }
                     break;
+                    libreria.crearYAgregarLibro(titulo, autor, isbn);
+                    break;
+
                 case 2:
                     System.out.print("Enter user name: ");
                     String name = scanner.nextLine();

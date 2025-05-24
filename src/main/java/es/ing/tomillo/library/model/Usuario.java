@@ -70,29 +70,6 @@ public class Usuario {
         librosPrestados.remove(libro);
     }
 
-    // Metodo para reservar libros
-    public void reservarLibro(Libro libro) {
-        if (librosReservado.contains(libro)) {
-            System.out.println("Usted ya tiene reservado el libro " + libro.getTitulo() + ", imposible reservar");
-        }
-        else if (libro.isReservado()) {
-            System.out.println("El libro " + libro.getTitulo() + " ya se encuentra reservado, imposible reservar");
-        }
-        else if (librosPrestados.contains(libro)) {
-            System.out.println("Usted tiene prestado el libro " + libro.getTitulo() + ", imposible reservar");
-        }
-        else if (libro.isDisponibilidad()) {
-            System.out.println("El libro " + libro.getTitulo() + " se encuentra disponible, no se ha efectuado la reserva");
-        }
-        else if (librosReservado.size() >= MAX_LIBROS_RESERVADOS) {
-            System.out.println("Límite de reservas alcanzado. No puede reservar más libros.");
-        }
-        else {
-            librosReservado.add(libro);
-            libro.setReservado(true);
-            System.out.println(libro.getTitulo() + " reservado");
-        }
-    }
 
     // Metodo para comprobar si el libro esta prestado
     public boolean tieneLibroPrestado(Libro libro) {

@@ -27,13 +27,31 @@ public class Libreria {
         return libros;
     }
 
+    // Mostrar por pantalla todos los usuarios registrados en la biblioteca
+    public void listUsers() {
+        for (Usuario usuario : usuarios) {
+            System.out.println("ID: " + usuario.getId());
+            System.out.println("Nombre: " + usuario.getNombre());
+            System.out.println("Número de libros reservados: " + usuario.getLibrosPrestadosNumero());
+        }
+    }
+
+    // Cargar datos de ejemplo
+    private void loadSampleData() {
+        // Cargar usuarios de ejemplo
+        // Cargar libros de ejemplo
+        System.out.println("Datos de ejemplo cargados:");
+        System.out.println("- " + usuarios.size() + " usuarios");
+        System.out.println("- " + libros.size() + " libros");
+    }
+
     // Metodo para devolver libros
     public void devolverLibro(Usuario usuarioQueDevuelveElLibro, Libro libroDevuelto) {
         if (!usuarioQueDevuelveElLibro.getLibrosPrestados().contains(libroDevuelto)) {
             System.out.println("El usuario  " + usuarioQueDevuelveElLibro.getNombre() + " no tiene el libro prestado");
             return;
         }
-        usuarioQueDevuelveElLibro.getLibrosPrestados().remove(libroDevuelto);
+        usuarioQueDevuelveElLibro.eliminarLibroPrestado(libroDevuelto);
         System.out.println(usuarioQueDevuelveElLibro.getNombre() + " ha devuelto el libro " + libroDevuelto.getTitulo());
         libroDevuelto.setDisponibilidad(true);
 
@@ -52,28 +70,8 @@ public class Libreria {
             }
         }
 
-        // Cargar datos de ejemplo
-    private void loadSampleData() {
-        // Cargar usuarios de ejemplo
-        // Cargar libros de ejemplo
-        System.out.println("Datos de ejemplo cargados:");
-        System.out.println("- " + usuarios.size() + " usuarios");
-        System.out.println("- " + libros.size() + " libros");
-    }
-
-    // Mostrar por pantalla todos los usuarios registrados en la biblioteca
-    public void listUsers() {
-        for (Usuario usuario : usuarios) {
-            System.out.println("ID: " + usuario.getId());
-            System.out.println("Nombre: " + usuario.getNombre());
-            System.out.println("Número de libros reservados: " + usuario.getLibrosPrestadosNumero());
-        }
-    }
-
-    // TODO: Implementar método prestarLibro según el ejercicio 3
-
     // Metodo para prestar un libro
-    public void prestarLibro(Usuario usuario, Libro libroPrestar) {
+    public void prestarLibro(Usuario usuarioPrestar, Libro libroPrestar) {
         if (usuarioPrestar.getLibrosPrestadosNumero() >= MAX_LIBROS_PRESTADOS) {
             System.out.println("Máximo numero de libros prestados, imposible prestar mas");
 
@@ -84,6 +82,30 @@ public class Libreria {
             usuarioPrestar.agregarLibroPrestado(libroPrestar);
             libroPrestar.setDisponibilidad(false);
             System.out.println(libroPrestar.getTitulo() + " prestado");
+        }
+    }
+
+    // Metodo para reservar libros
+    public void reservarLibro(Libro libro) {
+        if (librosReservado.contains(libro)) {
+            System.out.println("Usted ya tiene reservado el libro " + libro.getTitulo() + ", imposible reservar");
+        }
+        else if (libro.isReservado()) {
+            System.out.println("El libro " + libro.getTitulo() + " ya se encuentra reservado, imposible reservar");
+        }
+        else if (librosPrestados.contains(libro)) {
+            System.out.println("Usted tiene prestado el libro " + libro.getTitulo() + ", imposible reservar");
+        }
+        else if (libro.isDisponibilidad()) {
+            System.out.println("El libro " + libro.getTitulo() + " se encuentra disponible, no se ha efectuado la reserva");
+        }
+        else if (librosReservado.size() >= MAX_LIBROS_RESERVADOS) {
+            System.out.println("Límite de reservas alcanzado. No puede reservar más libros.");
+        }
+        else {
+            librosReservado.add(libro);
+            libro.setReservado(true);
+            System.out.println(libro.getTitulo() + " reservado");
         }
     }
 

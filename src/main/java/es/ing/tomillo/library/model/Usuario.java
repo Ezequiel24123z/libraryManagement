@@ -66,18 +66,6 @@ public class Usuario {
         }
     }
 
-    // Metodo para devolver libros
-    public void devolverLibro(Libro libro) {
-            if (librosPrestados.contains(libro)) {
-                librosPrestados.remove(libro);
-                for (Usuario usuario : usuarios) {
-                    if ()
-
-                }
-            }
-            else { System.out.println(libro.getTitulo() + " imposible devolver, no esta prestado");
-            }
-    }
 
     // Metodo para reservar libros
     public void reservarLibro(Libro libro) {

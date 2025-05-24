@@ -17,7 +17,6 @@ public class Library {
     public Library() {
         this.usuarios = new ArrayList<>();
         this.libros = new ArrayList<>();
-        loadSampleData(); // Cargar datos de ejemplo
     }
 
     public List<Usuario> getListaUsuarios() {
@@ -27,18 +26,21 @@ public class Library {
         return libros;
     }
 
+    // Metodo para devolver libros
+    public void devolverLibro(Libro libro) {
 
 
+
+    }
+
+
+        // Cargar datos de ejemplo
     private void loadSampleData() {
         // Cargar usuarios de ejemplo
-        usuarios.addAll(SampleData.SAMPLE_USERS);
-
         // Cargar libros de ejemplo
-
-
         System.out.println("Datos de ejemplo cargados:");
-        System.out.println("- " + users.size() + " usuarios");
-        System.out.println("- " + books.size() + " libros");
+        System.out.println("- " + usuarios.size() + " usuarios");
+        System.out.println("- " + libros.size() + " libros");
     }
 
     // Mostrar por pantalla todos los usuarios registrados en la biblioteca

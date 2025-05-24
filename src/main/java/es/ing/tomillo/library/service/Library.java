@@ -27,12 +27,25 @@ public class Library {
     }
 
     // Metodo para devolver libros
-    public void devolverLibro(Usuario usuarioQueDevuelveElLibro, Libro libro) {
-        if (!usuarioQueDevuelveElLibro.getLibrosPrestados().contains(libro)) {
+    public void devolverLibro(Usuario usuarioQueDevuelveElLibro, Libro libroDevuelto) {
+        if (!usuarioQueDevuelveElLibro.getLibrosPrestados().contains(libroDevuelto)) {
             System.out.print("El usuario  " + usuarioQueDevuelveElLibro.getNombre() + " no tiene el libro prestado");
             return;
         }
+        usuarioQueDevuelveElLibro.getLibrosPrestados().remove(libroDevuelto);
+        System.out.println(usuarioQueDevuelveElLibro.getNombre() + " ha devuelto el libro " + libroDevuelto.getTitulo());
 
+        for (Usuario usuario : usuarios) {
+            if (usuario.equals(usuarioQueDevuelveElLibro)) continue;
+            if (usuario.getLibrosReservado().contains(libroDevuelto)) {
+                if (usuario.getLibrosPrestadosNumero() < 5) {
+                    usuario.prestarLibro(libroDevuelto);
+                    usuario.getLibrosReservado().remove(libroDevuelto);
+                    libroDevuelto.setReservado(false);
+                    System.out.println("El libro " + libroDevuelto.getTitulo() + " ha sido prestado automáticamente a "+ usuario.getNombre());
+                }
+            }break;
+        }
 
 
 

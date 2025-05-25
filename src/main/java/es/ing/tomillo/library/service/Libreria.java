@@ -2,6 +2,7 @@ package es.ing.tomillo.library.service;
 
 import es.ing.tomillo.library.model.Libro;
 import es.ing.tomillo.library.model.Usuario;
+import es.ing.tomillo.library.util.SampleData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +40,9 @@ public class Libreria {
     }
 
     // Cargar datos de ejemplo
-    private void loadSampleData() {
-        // Cargar usuarios de ejemplo
-        // Cargar libros de ejemplo
+    private void cargarDatosDeEjemplo() {
+        usuarios.addAll(SampleData.usuariosEjemplo);
+        libros.addAll(SampleData.librosEjemplo);
         System.out.println("Datos de ejemplo cargados:");
         System.out.println("- " + usuarios.size() + " usuarios");
         System.out.println("- " + libros.size() + " libros");
@@ -180,18 +181,20 @@ public class Libreria {
         Libro libro = null;
         Usuario usuario = null;
         int id = 0;
+        libreria.cargarDatosDeEjemplo();
 
         while (!salir) {
             System.out.println("Opciones:");
             System.out.println("1. Añadir libro");
             System.out.println("2. Añadir usuario");
             System.out.println("3. Prestar libro");
-            System.out.println("4. Devolver libro");
-            System.out.println("5. Buscar libro por titulo");
-            System.out.println("6. Buscar libro por autor");
-            System.out.println("7. Mostrar libros disponibles");
-            System.out.println("8. Mostrar usuarios");
-            System.out.println("9. Salir");
+            System.out.println("4. Reservar libro");
+            System.out.println("5. Devolver libro");
+            System.out.println("6. Buscar libro por titulo");
+            System.out.println("7. Buscar libro por autor");
+            System.out.println("8. Mostrar libros disponibles");
+            System.out.println("9. Mostrar usuarios");
+            System.out.println("10. Salir");
             System.out.print("Escoge una opción: ");
             int option = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -242,7 +245,7 @@ public class Libreria {
                     }
                     break;
 
-                case 33: // Reservar libro
+                case 4: // Reservar libro
                     System.out.print("Insertar nombre del usuario: ");
                     nombre = scanner.nextLine().trim();
                     System.out.print("Insertar titulo del libro: ");
@@ -261,7 +264,7 @@ public class Libreria {
                     }
                     break;
 
-                case 4: // Devolver libro
+                case 5: // Devolver libro
                     System.out.print("Insertar titulo del libro a devolver: ");
                     titulo = scanner.nextLine().trim();
                     System.out.print("Insertar nombre del usuario que devuelve el libro: ");
@@ -283,7 +286,7 @@ public class Libreria {
                     }
                     break;
 
-                case 5: // Buscar libro por título
+                case 6: // Buscar libro por título
                     System.out.print("Insertar nombre del titulo del libro que desea buscar: ");
                     titulo = scanner.nextLine().trim();
                     if (titulo.isEmpty()) {
@@ -298,7 +301,7 @@ public class Libreria {
                     }
                     break;
 
-                case 6: // Buscar libro por autor
+                case 7: // Buscar libro por autor
                     System.out.print("Insertar nombre del autor de el/los libro/s que desea buscar: ");
                     autor = scanner.nextLine().trim();
                     if (autor.isEmpty()) {
@@ -316,7 +319,7 @@ public class Libreria {
                     }
                     break;
 
-                case 7: // Listar libros disponibles
+                case 8: // Listar libros disponibles
                     List<Libro> librosDisponibles = libreria.listarLibrosDisponibles();
                     if (librosDisponibles.isEmpty()) {
                         System.out.println("No hay libros disponibles.");
@@ -328,7 +331,7 @@ public class Libreria {
                     }
                     break;
 
-                case 8: // Mostrar usuarios
+                case 9: // Mostrar usuarios
                     List<Usuario> usuariosDisponibles = libreria.getListaUsuarios();
                     if (usuariosDisponibles.isEmpty()) {
                         System.out.println("No hay usuarios.");
@@ -340,7 +343,7 @@ public class Libreria {
                     }
                     break;
 
-                case 9: // Salir
+                case 10: // Salir
                     salir = true;
                     break;
                 default:

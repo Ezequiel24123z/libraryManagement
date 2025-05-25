@@ -38,9 +38,7 @@ public class Usuario {
     }
 
     public List<Libro> getLibrosPrestados() {
-        return Collections.unmodifiableList(librosPrestados);   // Modificación: devolver librosPrestados() puede implicar un riesgo
-                                                                // de seguridad y rompe la encapsulación, por lo tanto es mejor devolver una lista
-                                                                // inmodificable que protege ante cambios
+        return Collections.unmodifiableList(librosPrestados);
     }
 
     public int getLibrosPrestadosNumero() {

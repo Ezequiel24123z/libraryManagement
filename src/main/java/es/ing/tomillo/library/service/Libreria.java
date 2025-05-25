@@ -98,7 +98,7 @@ public class Libreria {
         } else {
             usuarioPrestar.agregarLibroPrestado(libroPrestar);
             libroPrestar.setDisponibilidad(false);
-            System.out.println(libroPrestar.getTitulo() + " prestado");
+            System.out.println(libroPrestar.getTitulo() + " prestado al usuario " + usuarioPrestar.getNombre() );
         }
     }
 
@@ -197,9 +197,21 @@ public class Libreria {
             System.out.println("9. Mostrar usuarios");
             System.out.println("10. Salir");
             System.out.print("Escoge una opción: ");
-            int option = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            String input = scanner.nextLine().trim();
+            int option;
 
+            try { // Check para que sea un numero
+                option = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Debes ingresar un número válido.");
+                System.out.print("¿Quieres volver al menú principal? (S/N): ");
+                respuesta = scanner.nextLine().trim().toUpperCase();
+                if (!respuesta.equals("S")) {
+                    salir = true;
+                    System.out.println("Saliendo del programa...");
+                }
+                continue;
+            }
             switch (option) {
 
                 case 1: // Añadir libro a la biblioteca
@@ -417,9 +429,15 @@ public class Libreria {
                     break;
                 default:
                     System.out.println("Esta opción no existe.");
+                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
+                    respuesta = scanner.nextLine().trim().toUpperCase();
+                    if (!respuesta.equals("S")) {
+                        salir = true;
+                        System.out.println("Saliendo del programa...");
+
+                    }
             }
         }
-
         scanner.close();
     }
 }

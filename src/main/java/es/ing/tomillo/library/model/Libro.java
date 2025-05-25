@@ -68,7 +68,7 @@ public class Libro {
     // Implementación del metodo toString
     @Override // Se sobreescribe el metodo toString que tienen todos los tipos de manera predeterminada para la clase "Libro"
     public String toString() {
-        return "Libro{" + "titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn + ", disponibilidad=" + disponibilidad + '}';
+        return "Libro= " + titulo + ", autor=" + autor + ", isbn=" + isbn + ", disponibilidad=" + disponibilidad + ", reservado=" + reservado;
     }
 
     // Implementar metodo equals para comparar libros por ISBN

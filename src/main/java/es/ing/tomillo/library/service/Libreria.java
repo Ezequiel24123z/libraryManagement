@@ -192,7 +192,7 @@ public class Libreria {
             System.out.println("7. Mostrar libros disponibles");
             System.out.println("8. Mostrar usuarios");
             System.out.println("9. Salir");
-            System.out.print("Choose an option: ");
+            System.out.print("Escoge una opción: ");
             int option = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
@@ -239,6 +239,25 @@ public class Libreria {
                         } else if (libro == null) {
                             System.out.println("Error: Libro no encontrado");
                         } else libreria.prestarLibro(usuario, libro);
+                    }
+                    break;
+
+                case 33: // Reservar libro
+                    System.out.print("Insertar nombre del usuario: ");
+                    nombre = scanner.nextLine().trim();
+                    System.out.print("Insertar titulo del libro: ");
+                    titulo = scanner.nextLine().trim();
+                    if (titulo.isEmpty() || nombre.isEmpty()) {
+                        System.out.println("Error: No se pueden dejar campos vacíos");
+                    } else {
+                        usuario = libreria.buscarUsuarioPorNombre(nombre);
+                        libro = libreria.buscarLibroPorTitulo(titulo);
+
+                        if (usuario == null) {
+                            System.out.println("Error: Usuario no encontrado");
+                        } else if (libro == null) {
+                            System.out.println("Error: Libro no encontrado");
+                        } else libreria.reservarLibro(usuario, libro);
                     }
                     break;
 

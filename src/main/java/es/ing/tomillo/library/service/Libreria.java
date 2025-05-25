@@ -140,6 +140,17 @@ public class Libreria {
         return librosPorAutor;
     }
 
+    // Implementar metodo buscarUsuarioPorNombre
+
+    public Usuario buscarUsuarioPorNombre(String nombre) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNombre().equalsIgnoreCase(nombre)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
+
     // Implementar metodo listarLibrosDisponibles según el ejercicio 5
     public List<Libro> listarLibrosDisponibles() {
         List<Libro> librosDisponibles = new ArrayList<>();
@@ -187,7 +198,7 @@ public class Libreria {
 
             switch (option) {
 
-                case 1: //Añadir libro a la biblioteca
+                case 1: // Añadir libro a la biblioteca
                     System.out.print("Insertar titulo del libro: ");
                     titulo = scanner.nextLine().trim();
                     System.out.print("Insertar autor del libro: ");
@@ -201,7 +212,7 @@ public class Libreria {
                     }
                     break;
 
-                case 2: //Añadir usuario a la biblioteca
+                case 2: // Añadir usuario a la biblioteca
                     System.out.print("Insertar nombre del usuario: ");
                     String nombre = scanner.nextLine().trim();
                     if (nombre.isEmpty()) {
@@ -212,20 +223,25 @@ public class Libreria {
                     }
                     break;
 
-                case 3:
+                case 3: // Prestar libro
                     System.out.print("Insertar nombre del usuario: ");
                     nombre = scanner.nextLine().trim();
-                    scanner.nextLine(); // Consume newline
                     System.out.print("Insertar titulo del libro: ");
                     titulo = scanner.nextLine().trim();
-                    if (nombre.isEmpty() || titulo.isEmpty()) {
-                        System.out.println("Error: No se pueden dejar campos vacíos.");
+                    if (titulo.isEmpty() || nombre.isEmpty()) {
+                        System.out.println("Error: No se pueden dejar campos vacíos");
                     } else {
-                        Usuario usuario = null;
-                        for (Usuario u : libreria.getListaUsuarios()) {
-                            if (u.getNombre().equalsIgnoreCase(nombre)) {
-                                usuario = u;
+                        usuario = libreria.buscarUsuarioPorNombre(nombre);
+                        libro = libreria.buscarLibroPorTitulo(titulo);
+
+                        if (usuario == null) {
+                            System.out.println("Error: Usuario no encontrado");
+                        } else if (libro == null) {
+                            System.out.println("Error: Libro no encontrado");
+                        } else libreria.prestarLibro(usuario, libro);
+                    }
                     break;
+
                 case 4:
                     System.out.print("Enter user ID: ");
                     id = scanner.nextInt();

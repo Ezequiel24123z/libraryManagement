@@ -77,7 +77,7 @@ public class Libreria {
             if (usuario.getLibrosReservado().contains(libroDevuelto)) {
                 if (usuario.getLibrosPrestadosNumero() < 5) {
                     prestarLibro(usuario, libroDevuelto);
-                    usuario.getLibrosReservado().remove(libroDevuelto);
+                    usuario.eliminarLibroPrestado(libroDevuelto);
                     libroDevuelto.setReservado(false);
                     libroDevuelto.setDisponibilidad(false);
                     System.out.println("El libro " + libroDevuelto.getTitulo() + " ha sido prestado automáticamente a " + usuario.getNombre());
@@ -115,7 +115,7 @@ public class Libreria {
         } else if (usuarioReservar.getLibrosReservado().size() >= MAX_LIBROS_RESERVADOS) {
             System.out.println("Límite de reservas alcanzado para el usuario " + usuarioReservar.getNombre() + ". No puede reservar más libros.");
         } else {
-            usuarioReservar.getLibrosReservado().add(libroReservar);
+            usuarioReservar.agregarLibroReservado(libroReservar);
             libroReservar.setReservado(true);
             System.out.println("El libro " + libroReservar.getTitulo() + " ha sido reservado para el usuario " + usuarioReservar.getNombre());
         }

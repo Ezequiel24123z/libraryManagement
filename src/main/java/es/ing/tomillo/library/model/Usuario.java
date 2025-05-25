@@ -44,8 +44,13 @@ public class Usuario {
     public int getLibrosPrestadosNumero() {
         return librosPrestados.size();
     }
+
     public List<Libro> getLibrosReservado() {
         return Collections.unmodifiableList(librosReservado);
+    }
+
+    public void agregarLibroReservado(Libro libro) {
+        librosReservado.add(libro);
     }
 
     // Implementación de setters

@@ -242,51 +242,90 @@ public class Libreria {
                     }
                     break;
 
-                case 4:
-                    System.out.print("Enter user ID: ");
-                    id = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    System.out.print("Enter book title: ");
-                    title = scanner.nextLine();
-                    user = library.getUserById(id);
-                    book = library.searchBookByTitle(title);
-                    if (user != null && book != null) {
-                        library.returnBook(user, book);
+                case 4: // Devolver libro
+                    System.out.print("Insertar titulo del libro a devolver: ");
+                    titulo = scanner.nextLine().trim();
+                    System.out.print("Insertar nombre del usuario que devuelve el libro: ");
+                    nombre = scanner.nextLine().trim();
+                    if (titulo.isEmpty() || nombre.isEmpty()) {
+                        System.out.println("Error, no se pueden dejar campos vacíos");
                     } else {
-                        System.out.println("User or book not found.");
+                        libro = libreria.buscarLibroPorTitulo(titulo);
+                        usuario = libreria.buscarUsuarioPorNombre(nombre);
+                        if (libro == null) {
+                            System.out.println("Error: Libro no encontrado");
+                        } else if (usuario == null) {
+                            System.out.println("Error: Usuario no encontrado");
+                        } else if (!usuario.tieneLibroPrestado(libro)) {
+                            System.out.println("Error: El usuario no tiene este libro prestado");
+                        } else {
+                            libreria.devolverLibro(usuario, libro);
+                        }
                     }
                     break;
-                case 5:
-                    System.out.print("Enter book title: ");
-                    title = scanner.nextLine();
-                    book = library.searchBookByTitle(title);
-                    if (book != null) {
-                        System.out.println(book);
+
+                case 5: // Buscar libro por título
+                    System.out.print("Insertar nombre del titulo del libro que desea buscar: ");
+                    titulo = scanner.nextLine().trim();
+                    if (titulo.isEmpty()) {
+                        System.out.println("Error, el titulo no puede estar vacio");
                     } else {
-                        System.out.println("Book not found.");
+                        libro = libreria.buscarLibroPorTitulo(titulo);
+                        if (libro != null) {
+                            System.out.println(libro);
+                        } else {
+                            System.out.println("Libro no encontrado.");
+                        }
                     }
                     break;
-                case 6:
-                    System.out.print("Enter book author: ");
-                    author = scanner.nextLine();
-                    book = library.searchBookByAuthor(author);
-                    if (book != null) {
-                        System.out.println(book);
+
+                case 6: // Buscar libro por autor
+                    System.out.print("Insertar nombre del autor de el/los libro/s que desea buscar: ");
+                    autor = scanner.nextLine().trim();
+                    if (autor.isEmpty()) {
+                        System.out.println("Error, el nombre del autor no puede estar vacío");
                     } else {
-                        System.out.println("Book not found.");
+                        List<Libro> librosPorAutor = libreria.buscarLibroPorAutor(autor);
+                        if (librosPorAutor.isEmpty()) {
+                            System.out.println("Libro/s no encontrado.");
+                        } else {
+                            System.out.println("Libro/s de " + autor + ":");
+                            for (Libro libroEncontrado : librosPorAutor) {
+                                System.out.println(libroEncontrado);
+                            }
+                        }
                     }
                     break;
-                case 7:
-                    library.listAvailableBooks();
+
+                case 7: // Listar libros disponibles
+                    List<Libro> librosDisponibles = libreria.listarLibrosDisponibles();
+                    if (librosDisponibles.isEmpty()) {
+                        System.out.println("No hay libros disponibles.");
+                    } else {
+                        System.out.println("Libros disponibles:");
+                        for (Libro libroEncontrado : librosDisponibles) {
+                            System.out.println(libroEncontrado);
+                        }
+                    }
                     break;
-                case 8:
-                    library.listUsers();
+
+                case 8: // Mostrar usuarios
+                    List<Usuario> usuariosDisponibles = libreria.getListaUsuarios();
+                    if (usuariosDisponibles.isEmpty()) {
+                        System.out.println("No hay usuarios.");
+                    } else {
+                        System.out.println("Usuarios disponibles:");
+                        for (Usuario usuarioEncontrado : usuariosDisponibles) {
+                            System.out.println(usuarioEncontrado);
+                        }
+                    }
                     break;
-                case 9:
-                    exit = true;
+
+                case 9: // Salir
+                    salir = true;
                     break;
                 default:
-                    System.out.println("Invalid option.");
+                    System.out.println("Esta opción no existe.");
             }
         }
 

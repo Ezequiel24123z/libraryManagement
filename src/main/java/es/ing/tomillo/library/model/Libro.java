@@ -84,7 +84,7 @@ public class Libro {
         if (this.isbn == null)
             return segundoLibro.getIsbn() == null; //Si los dos ISBN son Null, da True
 
-        return this.isbn.equals(segundoLibro.getIsbn()); //Devuelve un boolean (true o false) en la comparación de los dos libros
+        return this.isbn.equals(segundoLibro.getIsbn()); //Devuelve un boolean (true or false) en la comparación de los dos libros
 
     }
     @Override

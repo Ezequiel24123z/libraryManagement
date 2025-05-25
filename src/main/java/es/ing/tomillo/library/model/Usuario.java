@@ -54,9 +54,6 @@ public class Usuario {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
 
     // Agregar Libro a la lista de libros prestados
     public void agregarLibroPrestado(Libro libro) {

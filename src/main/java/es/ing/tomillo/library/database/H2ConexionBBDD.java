@@ -53,7 +53,6 @@ public class H2ConexionBBDD {
                     break;
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

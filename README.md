@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Bienvenidos a **Biblioteca Java: Primeras aventuras en la Programación**. 
+Bienvenidos a **Biblioteca Java: Primeras aventuras en la Programación**.
 En esta práctica, desarrollarás una aplicación en Java para gestionar una biblioteca. Implementarás clases y métodos para manejar libros y usuarios, y utilizarás JUnit para verificar el correcto funcionamiento del código. Además, se incluyen desafíos adicionales para los estudiantes más avanzados.
 
 ## Instrucciones
@@ -16,8 +16,8 @@ En esta práctica, desarrollarás una aplicación en Java para gestionar una bib
    git clone https://github.com/<usuario>/libraryManagement.git
    ```
 ### 2. Instalación
-   Abre el proyecto en tu IDE (IntelliJ, Eclipse, Visual Studio Code).
-   Asegúrate de tener instalado Java y Maven.
+Abre el proyecto en tu IDE (IntelliJ, Eclipse, Visual Studio Code).
+Asegúrate de tener instalado Java y Maven.
 
 ### 3. Ejecución
 
@@ -32,10 +32,10 @@ En esta práctica, desarrollarás una aplicación en Java para gestionar una bib
       Implementa métodos getters y setters para los atributos.
       Implementa un método toString para mostrar la información del libro.
 
-#### 2. Clase User      
+#### 2. Clase User
       Implementa un método borrowBook para añadir un libro al lista de libros prestados.
       Implementa un método returnBook para eliminar un libro del lista de libros prestados.
-      
+
 #### 3. Clase Biblioteca
       Crea una clase Biblioteca con los siguientes atributos: libros (Lista de Libro), usuarios (Lista de Usuario).
       Implementa un constructor para inicializar los atributos.
@@ -55,8 +55,10 @@ En esta práctica, desarrollarás una aplicación en Java para gestionar una bib
       Implementa un método reserveBook en la clase User para reservar libros que no están disponibles.
 ##### Extra extra:
       En la rama del repositorio de github denomidada bbdd, está implementada una conexión a una base de datos 
-      utilizando JDBC para almacenar y recuperar información de libros y usuarios. Haz uso de la clase LibraryJDBC
+      utilizando JDBC para almacenar y recuperar información de libros y usuarios. Haz uso de la clase LibraryJDBC, y
+      de las clases DAO, UserDAO y BookDAO
+      Todas las funcionalidades de usuario están funcionando:
+      Faltan las sentencias SQL de la clase Libros, BookDAO, para que funcione totalmente la biblioteca
 
 ### 6. Contacto
 Si tienes dudas, [nos puedes enviar un email](ing-tomillo-java@ing.com)
-

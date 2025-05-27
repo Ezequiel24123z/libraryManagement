@@ -151,6 +151,15 @@ public class Libreria {
         return null;
     }
 
+    public void backToMenu() {
+        System.out.println("¿Volver al menú principal? (S/N)");
+        Scanner scanner = new Scanner(System.in);
+        if (scanner.next().equalsIgnoreCase("N")) {
+            System.exit(0);
+            System.out.println("Saliendo del programa...");
+        }
+    }
+
     // Implementar metodo listarLibrosDisponibles según el ejercicio 5
     public List<Libro> listarLibrosDisponibles() {
         List<Libro> librosDisponibles = new ArrayList<>();
@@ -230,13 +239,7 @@ public class Libreria {
                     } else {
                         libreria.crearYAgregarLibro(titulo, autor, isbn);
                     }
-
-                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
-                    respuesta = scanner.nextLine().trim().toUpperCase();
-                    if (!respuesta.equals("S")) {
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
-                    }
+                    libreria.backToMenu();
                     break;
 
                 case 2: // Añadir usuario a la biblioteca
@@ -244,17 +247,10 @@ public class Libreria {
                     String nombre = scanner.nextLine().trim();
                     if (nombre.isEmpty()) {
                         System.out.println("Error, el nombre no puede estar vacío");
-                    }
-                    else {
+                    } else {
                         libreria.crearYAgregarUsuario(nombre);
                     }
-
-                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
-                    respuesta = scanner.nextLine().trim().toUpperCase();
-                    if (!respuesta.equals("S")) {
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
-                    }
+                    libreria.backToMenu();
                     break;
 
                 case 3: // Prestar libro
@@ -275,12 +271,7 @@ public class Libreria {
                         } else libreria.prestarLibro(usuario, libro);
                     }
 
-                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
-                    respuesta = scanner.nextLine().trim().toUpperCase();
-                    if (!respuesta.equals("S")) {
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
-                    }
+                    libreria.backToMenu();
                     break;
 
                 case 4: // Reservar libro
@@ -300,13 +291,7 @@ public class Libreria {
                             System.out.println("Error: Libro no encontrado");
                         } else libreria.reservarLibro(usuario, libro);
                     }
-
-                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
-                    respuesta = scanner.nextLine().trim().toUpperCase();
-                    if (!respuesta.equals("S")) {
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
-                    }
+                    libreria.backToMenu();
                     break;
 
                 case 5: // Devolver libro
@@ -330,12 +315,7 @@ public class Libreria {
                         }
                     }
 
-                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
-                    respuesta = scanner.nextLine().trim().toUpperCase();
-                    if (!respuesta.equals("S")) {
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
-                    }
+                    libreria.backToMenu();
                     break;
 
                 case 6: // Buscar libro por título
@@ -352,12 +332,7 @@ public class Libreria {
                         }
                     }
 
-                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
-                    respuesta = scanner.nextLine().trim().toUpperCase();
-                    if (!respuesta.equals("S")) {
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
-                    }
+                    libreria.backToMenu();
                     break;
 
                 case 7: // Buscar libro por autor
@@ -377,12 +352,7 @@ public class Libreria {
                         }
                     }
 
-                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
-                    respuesta = scanner.nextLine().trim().toUpperCase();
-                    if (!respuesta.equals("S")) {
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
-                    }
+                    libreria.backToMenu();
                     break;
 
                 case 8: // Listar libros disponibles
@@ -396,12 +366,7 @@ public class Libreria {
                         }
                     }
 
-                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
-                    respuesta = scanner.nextLine().trim().toUpperCase();
-                    if (!respuesta.equals("S")) {
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
-                    }
+                    libreria.backToMenu();
                     break;
 
                 case 9: // Mostrar usuarios
@@ -414,13 +379,7 @@ public class Libreria {
                             System.out.println(usuarioEncontrado);
                         }
                     }
-
-                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
-                    respuesta = scanner.nextLine().trim().toUpperCase();
-                    if (!respuesta.equals("S")) {
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
-                    }
+                    libreria.backToMenu();
                     break;
 
                 case 10: // Salir
@@ -428,16 +387,12 @@ public class Libreria {
                     break;
                 default:
                     System.out.println("Esta opción no existe.");
-                    System.out.print("¿Quieres volver al menú principal? (S/N): ");
-                    respuesta = scanner.nextLine().trim().toUpperCase();
-                    if (!respuesta.equals("S")) {
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
+                    libreria.backToMenu();
 
-                    }
             }
         }
         scanner.close();
     }
 }
+
 

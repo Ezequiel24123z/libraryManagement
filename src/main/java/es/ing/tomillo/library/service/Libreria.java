@@ -77,7 +77,6 @@ public class Libreria {
             if (usuario.getLibrosReservado().contains(libroDevuelto)) {
                 if (usuario.getLibrosPrestadosNumero() < 5) {
                     prestarLibro(usuario, libroDevuelto);
-                    usuario.eliminarLibroPrestado(libroDevuelto);
                     libroDevuelto.setReservado(false);
                     libroDevuelto.setDisponibilidad(false);
                     System.out.println("El libro " + libroDevuelto.getTitulo() + " ha sido prestado automáticamente a " + usuario.getNombre());

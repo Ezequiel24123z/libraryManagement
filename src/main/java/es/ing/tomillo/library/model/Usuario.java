@@ -38,7 +38,7 @@ public class Usuario {
     }
 
     public List<Libro> getLibrosPrestados() {
-        return Collections.unmodifiableList(librosPrestados);
+        return (librosPrestados);
     }
 
     public int getLibrosPrestadosNumero() {
@@ -46,11 +46,14 @@ public class Usuario {
     }
 
     public List<Libro> getLibrosReservado() {
-        return Collections.unmodifiableList(librosReservado);
+        return librosReservado;
     }
 
     public void agregarLibroReservado(Libro libro) {
-        librosReservado.add(libro);
+        if (librosReservado.size() >= MAX_LIBROS_RESERVADOS) {
+            System.out.println("Has alcanzado el máximo de libros reservados.");
+            return; }
+            librosReservado.add(libro);
     }
 
     // Implementación de setters

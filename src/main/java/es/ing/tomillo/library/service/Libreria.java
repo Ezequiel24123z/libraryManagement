@@ -73,7 +73,7 @@ public class Libreria {
         libroDevuelto.setDisponibilidad(true);
 
         for (Usuario usuario : usuarios) {
-            if (usuario.equals(usuarioQueDevuelveElLibro)) continue;
+            if (usuario.equals(usuarioQueDevuelveElLibro)) continue; // continue salta esa iteración y pasa al siguiente usuario
             if (usuario.getLibrosReservado().contains(libroDevuelto)) {
                 if (usuario.getLibrosPrestadosNumero() < 5) {
                     prestarLibro(usuario, libroDevuelto);
@@ -92,7 +92,7 @@ public class Libreria {
             System.out.println("Máximo numero de libros prestados, imposible prestar mas");
 
         } else if (!libroPrestar.isDisponibilidad()) {
-            System.out.println("El libro " + libroPrestar.getTitulo() + "no se encuentra disponible");
+            System.out.println("El libro " + libroPrestar.getTitulo() + " no se encuentra disponible");
 
         } else {
             usuarioPrestar.agregarLibroPrestado(libroPrestar);
@@ -155,8 +155,8 @@ public class Libreria {
         System.out.println("¿Volver al menú principal? (S/N)");
         Scanner scanner = new Scanner(System.in);
         if (scanner.next().equalsIgnoreCase("N")) {
-            System.exit(0);
             System.out.println("Saliendo del programa...");
+            System.exit(0);
         }
     }
 
